@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script will display the phrase "Best School" 10 times but print Hi on the 9th time
+
+i=0
+
+while [ $i -lt 10 ]
+do
+if [ $i -eq 9 ]
+then
+echo "Hi"
+if
+echo "Best School"
+(( i++ ))
+done
