@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script configures a server to get the Nginx running and listening on Port 80
+sed -i 's/listen 8080/listen 80/g' /etc/nginx/sites-enabled/default
+sed -i 's/listen \[::\]:8080/listen \[::\]:80/g' /etc/nginx/sites-enabled/default
+service nginx restart
