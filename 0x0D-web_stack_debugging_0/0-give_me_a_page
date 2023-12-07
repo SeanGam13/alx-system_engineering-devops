@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 # script to initialize server apache
 /etc/init.d/apache2 start
+=======
+# Start apache2 service
+service apache2 start
+>>>>>>> 17e32599e1e939393acfe4ec848af2885c911da2
