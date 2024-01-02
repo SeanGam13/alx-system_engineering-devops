@@ -4,6 +4,8 @@ from sys import argv
 import json
 import requests
 
+URL = "https://jsonplaceholder.typicode.com"  # The API's URL
+
 if __name__ == "__main__":
     if len(argv) > 1:
         if argv[1].isdecimal() and int(argv[1]) >= 0:
