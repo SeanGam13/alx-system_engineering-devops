@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This script is a Query Reddit API to determine subreddit sub countt."""
+"""Query Reddit API to determine subreddit sub count."""
 import requests
 
 
