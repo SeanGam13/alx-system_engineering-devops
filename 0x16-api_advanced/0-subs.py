@@ -4,13 +4,27 @@ import requests
 
 
 def number_of_subscribers(subreddit):
-"""queries the Reddit API"""
-headers = {
-"User-Agent": "0x16. API_advanced-e_kiminza"
-}
-url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-response = requests.get(url, headers=headers, allow_redirects=False)
-if response.status_code != 200:
-return 0
-sub = response.json().get("data").get("subscribers")
-    return sub
+        """
+    Returns the number of subscribers for a given subreddit
+
+    Args:
+        subreddit: the subreddit to be checked
+
+    Return:
+        0, if subreddit is invalid else the number or subscribers
+    """
+
+            if subreddit is None or not isinstance(subreddit, str):
+                        return None
+
+                        url = f"https://www.reddit.com/r/{subreddit}/about.json"
+                            user_agent = "Google Chrome Version 81.0.4044.129"
+                                header = {"User-Agent": user_agent}
+                                    response = requests.get(url, headers=header)
+
+                                        try:
+                                                    data = response.json()
+                                                            subscribers = data.get('data').get('subscribers')
+                                                                    return (subscribers)
+                                        except Exception:
+                                                    return 0
