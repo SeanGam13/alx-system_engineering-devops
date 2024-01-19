@@ -1,13 +1,24 @@
 #!/usr/bin/python3
 """Function to print hot posts on a given Reddit subreddit."""
-import requests
+from requests import get
 
 
 def top_ten(subreddit):
-    """return total number of subscriber for a subreddit"""
-    url = "https://api.reddit.com/r/{}?sort=hot&limit=10".format(subreddit)
-    headers = {'User-Agent': 'alx-api-12345/0.1 (by u/elghafiani)'}
-    res = requests.get(url, headers=headers, allow_redirects=False)
-    data = res.json()["data"]["children"]
-    for post in data[:10]:
-        print(post["data"]["title"])
+    """ Prints the titles of the first 10 hot posts for a given subreddit """
+
+    if subreddit is None and not isinstance(subreddit, str):
+        print("None")
+
+    params = {"limit": 10}
+    header = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
+    base_url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
+    response = get(base_url, params=params, headers=header)
+
+    try:
+        data = response.json()
+        data_list = data.get('data').get('children')
+
+        for data in data_list:
+            print(data.get('data').get('title'))
+    except Exception:
+        print("None")
