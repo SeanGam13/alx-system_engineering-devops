@@ -1,24 +1,27 @@
 #!/usr/bin/python3
 """Function to print hot posts on a given Reddit subreddit."""
-from requests import get
+import requests
 
 
 def top_ten(subreddit):
-    """ Prints the titles of the first 10 hot posts for a given subreddit """
+    """Request top ten hot posts of subreddit
+    from Reddit API
+    """
+    # set custom user-agent
+    user_agent = 'YourBotName/1.0'
+    url = 'https://www.reddit.com/r/{}/hot.json?limit=10'.format(subreddit)
 
-    if subreddit is None and not isinstance(subreddit, str):
-        print("None")
+    # custom user-agent avoids request limit
+    headers = {'User-Agent': user_agent}
 
-    params = {"limit": 10}
-    header = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
-    base_url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
-    response = get(base_url, params=params, headers=header)
+    r = requests.get(url, headers=headers, allow_redirects=False)
 
-    try:
-        data = response.json()
-        data_list = data.get('data').get('children')
-
-        for data in data_list:
-            print(data.get('data').get('title'))
-    except Exception:
-        print("None")
+    if r.status_code != 200:
+        print('None')
+    else:
+        # load response unit from json
+        data = r.json()['data']
+        # extract list of pages
+        posts = data['children']
+        for post in posts:
+            print(post['data']['title'])
